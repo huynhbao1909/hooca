@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiết Kế CV</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Gradient nền */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .cv-container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 90%;
+            max-width: 900px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out; /* Hiệu ứng xuất hiện */
+        }
+
+        .left-section {
+            width: 100%;
+            max-width: 40%;
+            background-color: #2a9d8f;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border-right: 4px solid #fff; /* Tạo đường chia giữa */
+        }
+
+        /* Khung ảnh hình chữ nhật */
+        .left-section img {
+            width: 150px;
+            height: 250px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            transition: transform 0.3s ease-in-out; /* Hiệu ứng khi hover ảnh */
+        }
+
+        .left-section img:hover {
+            transform: scale(1.1); /* Phóng to ảnh khi hover */
+        }
+
+        .left-section h2 {
+            margin-top: 0;
+            font-size: 26px;
+            font-weight: bold;
+            color: #ff4081;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .left-section input, 
+        .left-section textarea {
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ff4081;
+            background-color: #fff;
+            transition: border-color 0.3s ease;
+        }
+
+        .left-section input:focus, 
+        .left-section textarea:focus {
+            border-color: #ff4081;
+            outline: none;
+        }
+
+        .right-section {
+            width: 100%;
+            max-width: 60%;
+            padding: 20px;
+            background: #fff;
+            border-left: 4px solid #ff4081; /* Đường chia giữa */
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #ff4081;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        /* Nhãn dán */
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #ff4081;
+            color: white;
+            font-size: 12px;
+            border-radius: 12px;
+            margin-left: 10px;
+            animation: bounce 1s infinite; /* Hiệu ứng nhảy cho nhãn dán */
+        }
+
+        .badge:hover {
+            background-color: #e1b2c3;
+        }
+
+        /* Hiệu ứng nhảy */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Hiệu ứng Fade-in cho container */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Hiệu ứng hover cho nút và input */
+        input[type="file"]:hover, .badge:hover {
+            background-color: #ff79c6;
+        }
+
+        input[type="file"], textarea {
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .left-section, .right-section {
+                max-width: 100%;
+                border: none; /* Loại bỏ đường chia khi màn hình nhỏ */
+            }
+
+            .cv-container {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="cv-container">
+    <!-- Phần bên trái -->
+    <div class="left-section">
+        <div class="section-title">Thêm ảnh đại diện</div>
+        <input type="file" accept="image/*" id="imageInput" aria-label="Thêm ảnh đại diện"><br>
+        
+        <!-- Placeholder for image -->
+        <img id="profileImage" src="" alt="Ảnh đại diện" style="display: none;">
+        
+        <h2><input type="text" placeholder="Họ Tên" aria-label="Họ Tên"></h2>
+        <p><input type="text" placeholder="Vị trí làm việc" aria-label="Vị trí làm việc"></p>
+        
+        <div class="section-title">Thông tin cá nhân <span class="badge">Mới</span></div>
+        <p>Email: <input type="email" placeholder="email@example.com" aria-label="Email"></p>
+        <p>Số điện thoại: <input type="tel" placeholder="0123456789" aria-label="Số điện thoại"></p>
+
+        <div class="section-title">Kỹ năng <span class="badge">Hot</span></div>
+        <textarea rows="3" placeholder="Nhập kỹ năng của bạn" aria-label="Kỹ năng"></textarea>
+
+        <div class="section-title">Sở thích <span class="badge">Thú vị</span></div>
+        <textarea rows="2" placeholder="Nhập sở thích của bạn" aria-label="Sở thích"></textarea>
+
+        <div class="section-title">Người tham chiếu</div>
+        <p><input type="text" placeholder="Tên người tham chiếu" aria-label="Người tham chiếu"></p>
+    </div>
+
+    <!-- Phần bên phải -->
+    <div class="right-section">
+        <h2><input type="text" placeholder="Họ Tên" aria-label="Họ Tên"></h2>
+        <p><input type="text" placeholder="Vị trí làm việc" aria-label="Vị trí làm việc"></p>
+        
+        <div class="section-title">Chứng chỉ <span class="badge">Cập nhật</span></div>
+        
+        <!-- Phần chọn ảnh cho chứng chỉ -->
+        <div class="section-title">Thêm ảnh chứng chỉ</div>
+        <input type="file" accept="image/*" id="certificateImageInput" aria-label="Thêm ảnh chứng chỉ"><br>
+        
+        <!-- Placeholder for certificate image -->
+        <img id="certificateImage" src="" alt="Ảnh chứng chỉ" style="display: none; width: 150px; height: 250px; object-fit: cover; margin-bottom: 20px; border-radius: 12px;">
+        
+        <textarea rows="2" placeholder="Nhập chứng chỉ của bạn" aria-label="Chứng chỉ"></textarea>
+        
+        <div class="section-title">Kinh nghiệm làm việc</div>
+        <div class="info-item">
+            <input type="text" placeholder="Thông tin kinh nghiệm làm việc" aria-label="Kinh nghiệm làm việc"><br>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript to preview the image when selected for profile image
+    const imageInput = document.getElementById('imageInput');
+    const profileImage = document.getElementById('profileImage');
+
+    imageInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        
+        if (file) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                profileImage.src = e.target.result;
+                profileImage.style.display = 'block'; // Display the image
+            };
+
+            reader.readAsDataURL(file); // Read the image file
+        }
+    });
+
+    // JavaScript to preview the certificate image when selected
+    const certificateImageInput = document.getElementById('certificateImageInput');
+    const certificateImage = document.getElementById('certificateImage');
+
+    certificateImageInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        
+        if (file) {
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                certificateImage.src = e.target.result;
+                certificateImage.style.display = 'block'; // Display the image
+            };
+
+            reader.readAsDataURL(file); // Read the image file
+        }
+    });
+</script>
+
+</body>
+</html>

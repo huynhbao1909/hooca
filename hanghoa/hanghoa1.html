@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giày Thể Thao - Chi Tiết</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1E90FF; /* Màu xanh dương cho nền trang */
+            color: white; /* Chỉnh màu chữ thành trắng để nổi bật trên nền xanh */
+        }
+
+        .product-detail {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .product-detail h1 {
+            font-size: 36px;
+            color: #fff; /* Màu chữ tiêu đề là trắng để dễ đọc trên nền xanh dương */
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .product-item {
+            display: inline-block;
+            width: 30%;
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .product-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product-item h3 {
+            font-size: 20px;
+            color: #333;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        .product-item .price {
+            font-size: 18px;
+            color: #1E90FF;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .product-item select,
+        .product-item button {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            font-size: 16px;
+        }
+
+        /* Giỏ hàng */
+        #cart {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            width: 300px;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%); /* Giỏ hàng ban đầu ở ngoài màn hình */
+            transition: transform 0.3s ease; /* Hiệu ứng mượt mà */
+        }
+
+        #cart.show {
+            transform: translateX(0); /* Khi giỏ hàng xuất hiện */
+        }
+
+        #cart h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        #cart ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #cart ul li {
+            margin-bottom: 10px;
+        }
+
+        #cart .close-cart {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: red;
+            color: white;
+            padding: 5px 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Giỏ hàng -->
+    <div id="cart">
+        <button class="close-cart" onclick="toggleCart()">Đóng Giỏ Hàng</button>
+        <h2>Giỏ Hàng</h2>
+        <ul id="cart-items">
+            <!-- Các sản phẩm trong giỏ hàng sẽ được thêm vào đây -->
+        </ul>
+        <p id="total"></p>
+        <button onclick="checkout()">Mua Ngay</button>
+    </div>
+
+    <div class="product-detail">
+        <h1>Giày Thể Thao</h1>
+
+        <!-- Sản phẩm 1 -->
+        <div class="product-item">
+            <img src="hinhanh/1.jpg.avif" alt="Giày Đá Bóng Turf Predator Club Sock">
+            <h3>GIÀY ĐÁ BÓNG TURF PREDATOR CLUB SOCK</h3>
+            <p>Được thiết kế để tạo sự thoải mái và hiệu suất tối ưu trên mặt sân cỏ nhân tạo.</p>
+            <p class="price">1.600.000 VND</p>
+            <select id="color-1">
+                <option value="Đỏ">Màu sắc: Đỏ</option>
+                <option value="Xanh">Màu sắc: Xanh</option>
+                <option value="Đen">Màu sắc: Đen</option>
+            </select>
+            <select id="size-1">
+                <option value="39">Size: 39</option>
+                <option value="40">Size: 40</option>
+                <option value="41">Size: 41</option>
+                <option value="42">Size: 42</option>
+            </select>
+            <button onclick="addToCart('Giày Đá Bóng Turf Predator Club Sock', 1600000, '1', '1')">Thêm vào giỏ hàng</button>
+            <button onclick="addToCart('Giày Đá Bóng Turf Predator Club Sock', 1600000, '1', '1', true)">Mua Ngay</button>
+        </div>
+
+        <!-- Sản phẩm 2 -->
+        <div class="product-item">
+            <img src="hinhanh/2.jpg.avif" alt="Giày Đá Bóng Trong Nhà Samba Inter Miami CF">
+            <h3>GIÀY ĐÁ BÓNG TRONG NHÀ SAMBA INTER MIAMI CF</h3>
+            <p>Được thiết kế đặc biệt cho các trận đấu trong nhà với độ bám tốt trên sàn cứng.</p>
+            <p class="price">2.700.000 VND</p>
+            <select id="color-2">
+                <option value="Trắng">Màu sắc: Trắng</option>
+                <option value="Đen">Màu sắc: Đen</option>
+            </select>
+            <select id="size-2">
+                <option value="38">Size: 38</option>
+                <option value="39">Size: 39</option>
+                <option value="40">Size: 40</option>
+                <option value="41">Size: 41</option>
+            </select>
+            <button onclick="addToCart('Giày Đá Bóng Trong Nhà Samba Inter Miami CF', 2700000, '2', '2')">Thêm vào giỏ hàng</button>
+            <button onclick="addToCart('Giày Đá Bóng Trong Nhà Samba Inter Miami CF', 2700000, '2', '2', true)">Mua Ngay</button>
+        </div>
+
+        <!-- Sản phẩm 3 -->
+        <div class="product-item">
+            <img src="hinhanh/3.jpg.avif" alt="Giày Đá Bóng Turf F50 League">
+            <h3>GIÀY ĐÁ BÓNG TURF F50 LEAGUE</h3>
+            <p>Sản phẩm mang lại sự linh hoạt và tốc độ cho các trận đấu trên sân cỏ nhân tạo.</p>
+            <p class="price">2.400.000 VND</p>
+            <select id="color-3">
+                <option value="Vàng">Màu sắc: Vàng</option>
+                <option value="Xanh">Màu sắc: Xanh</option>
+            </select>
+            <select id="size-3">
+                <option value="42">Size: 42</option>
+                <option value="43">Size: 43</option>
+                <option value="44">Size: 44</option>
+            </select>
+            <button onclick="addToCart('Giày Đá Bóng Turf F50 League', 2400000, '3', '3')">Thêm vào giỏ hàng</button>
+            <button onclick="addToCart('Giày Đá Bóng Turf F50 League', 2400000, '3', '3', true)">Mua Ngay</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Huỳnh Bảo Shop. Tất cả quyền được bảo lưu.</p>
+    </div>
+
+    <script>
+        const cart = loadCartFromLocalStorage();  // Khởi tạo giỏ hàng từ localStorage
+
+        // Thêm sản phẩm vào giỏ hàng
+        function addToCart(productName, price, productId, productSize, immediatePurchase = false) {
+            const color = document.getElementById(`color-${productId}`).value;
+            const size = document.getElementById(`size-${productId}`).value;
+
+            const item = {
+                name: productName,
+                color: color,
+                size: size,
+                price: price
+            };
+
+            cart.push(item);
+            alert(`${productName} đã được thêm vào giỏ hàng`);
+
+            if (immediatePurchase) {
+                window.location.href = 'thanh-toan.html';  // Chuyển đến trang thanh toán
+            } else {
+                updateCart();
+            }
+        }
+
+        // Cập nhật giỏ hàng
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - Màu: ${item.color} - Size: ${item.size} - Giá: ${item.price.toLocaleString()} VND`;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+
+            const totalElement = document.getElementById('total');
+            totalElement.textContent = `Tổng cộng: ${total.toLocaleString()} VND`;
+
+            saveCartToLocalStorage();  // Lưu giỏ hàng vào localStorage
+        }
+
+        // Lưu giỏ hàng vào localStorage
+        function saveCartToLocalStorage() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // Lấy giỏ hàng từ localStorage
+        function loadCartFromLocalStorage() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                return JSON.parse(savedCart);
+            }
+            return [];
+        }
+
+        // Toggle giỏ hàng
+        function toggleCart() {
+            const cartElement = document.getElementById('cart');
+            cartElement.classList.toggle('show');
+        }
+
+        // Mua ngay (chuyển hướng đến trang thanh toán hoặc hành động khác)
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Giỏ hàng của bạn đang trống!');
+            } else {
+                alert('Bạn sẽ được chuyển đến trang thanh toán!');
+                window.location.href = 'thanh-toan.html';  // Đổi thành đường dẫn thật của trang thanh toán
+            }
+        }
+
+        // Khởi tạo giỏ hàng khi trang tải
+        window.onload = function() {
+            updateCart();
+        };
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
